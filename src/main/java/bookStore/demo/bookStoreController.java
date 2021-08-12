@@ -1,10 +1,7 @@
 package bookStore.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,6 +9,7 @@ import java.util.List;
 public class bookStoreController {
 
     private final bookStoreService bookStoreService;
+
 
 
     @Autowired
@@ -24,14 +22,14 @@ public class bookStoreController {
         return bookStoreService.getUser();
     }
 
-    @DeleteMapping (value = "/user")
-    public void deleteUser(){return bookStoreService.deleteUser();}
+    @DeleteMapping (value = "/user",path = "{username}")
+    public void deleteUser(@PathVariable("username") String username){bookStoreService.deleteUser(username);}
 
     @PostMapping (value = "/user")
-    public void postUser(){return bookStoreService.postUser();}
+    public void postUser(@RequestBody user user){bookStoreService.postUser(user);}
 
     @PostMapping (value = "/user/orders")
-    public void postOrder(){return bookStoreService.postOrder();}
+    public void postOrder(@RequestBody user user){bookStoreService.postOrder(user);}
 
-    
+
 }
