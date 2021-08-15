@@ -1,5 +1,7 @@
 package bookStore.demo;
 
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -23,7 +25,7 @@ public class user {
 
     public user(String Username,String Password,LocalDate Dob){
         this.Username = Username;
-        this.Password = Password;
+        this.Password = bookSecurity.passwordEncoder().encode("Password");
         this.Dob = Dob;
         String[] Fname = Username.split("\\.");
         this.Name = Fname[0];
@@ -62,4 +64,6 @@ public class user {
                 ", Password='" + Password + '\'' +
                 '}';
     }
+
+
 }
