@@ -16,6 +16,11 @@ public class bookStoreController {
         this.bookStoreService = bookStoreService;
     }
 
+    @PostMapping (value = "/login")
+    public  void login(@RequestBody("username") String username,@RequestBody("password") String password){
+        bookStoreService.login(username,password);
+    }
+
     @GetMapping (value = "/user")
     public List<user> getUser(@RequestHeader("username") String username){
         return bookStoreService.getUser(username);
@@ -28,7 +33,7 @@ public class bookStoreController {
     public void postUser(@RequestBody user user){bookStoreService.postUser(user);}
 
     @PostMapping (value = "/user/orders")
-    public void postOrder(@RequestBody user user) throws IOException {bookStoreService.postOrder(user);}
+    public float postOrder(@RequestBody userOrder userOrder) throws IOException {return bookStoreService.postOrder(userOrder);}
 
     @GetMapping (value = "/book")
     public List<book> showBook() throws IOException {return bookStoreService.showBook();}

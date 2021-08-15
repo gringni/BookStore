@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +19,6 @@ public class bookStoreService {
 
     public List<user> getUser(String username){
         return List.of(bookRepository.getById(username));
-
-//                List.of(
-//                new user(
-//                        "john.doe",
-//                        "thisismysecreat",
-//                        LocalDate.of(1985,01,15)
-//        )
-//        );
     }
 
     public void deleteUser(String username){
@@ -47,10 +37,9 @@ public class bookStoreService {
         bookRepository.save(user);
     }
 
-    public void postOrder(user user) throws IOException {
-        List<book> bookL =allBook();
-        bookRepository.
-
+    public float postOrder(userOrder userOrder) throws IOException {
+        bookRepository.save(userOrder);
+        return userOrder.getPrice();
     }
 
     public List<book> showBook() throws IOException {
@@ -58,7 +47,7 @@ public class bookStoreService {
         
         return bookL;}
 
-    private List<book> allBook() throws IOException {
+    public static List<book> allBook() throws IOException {
             URL url = new URL("https://scb-test-book-publisher.herokuapp.com/books");
             HttpURLConnection connection1 = (HttpURLConnection) url.openConnection();
             connection1.setRequestProperty("accept", "application/json");
@@ -86,4 +75,11 @@ public class bookStoreService {
     }
 
 
+    public void login(String username, String password) {
+        user a =bookRepository.getById(username);
+        password = bookSecurity.passwordEncoder().encode(password);
+        if (a.getPassword() != password){
+            throw new IllegalAccessError("login Failed");
+        }
+    }
 }

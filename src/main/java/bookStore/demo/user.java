@@ -25,7 +25,7 @@ public class user {
 
     public user(String Username,String Password,LocalDate Dob){
         this.Username = Username;
-        this.Password = bookSecurity.passwordEncoder().encode("Password");
+        this.Password = bookSecurity.passwordEncoder().encode(Password);
         this.Dob = Dob;
         String[] Fname = Username.split("\\.");
         this.Name = Fname[0];
