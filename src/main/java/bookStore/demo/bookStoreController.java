@@ -16,17 +16,17 @@ public class bookStoreController {
         this.bookStoreService = bookStoreService;
     }
 
-    @PostMapping (value = "/login")
-    public  void login(@RequestBody("username") String username,@RequestBody("password") String password){
-        bookStoreService.login(username,password);
-    }
+//    @PostMapping (value = "/login")
+//    public  void login(@RequestParam(value="username") String username,@RequestParam(value ="password") String password){
+//        bookStoreService.login(username,password);
+//    }
 
     @GetMapping (value = "/user")
     public List<user> getUser(@RequestHeader("username") String username){
         return bookStoreService.getUser(username);
     }
 
-    @DeleteMapping (value = "/user",)
+    @DeleteMapping (value = "/user")
     public void deleteUser(@RequestHeader("username") String username){bookStoreService.deleteUser(username);}
 
     @PostMapping (value = "/user")

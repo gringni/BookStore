@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface bookRepository extends JpaRepository<user,String> {
+public interface bookRepository2 extends JpaRepository<userOrder,String> {
 
 }

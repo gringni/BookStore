@@ -17,6 +17,9 @@ public class bookStoreService {
     @Autowired
     private bookRepository bookRepository;
 
+    @Autowired
+    private bookRepository2 bookRepository2;
+
     public List<user> getUser(String username){
         return List.of(bookRepository.getById(username));
     }
@@ -38,7 +41,7 @@ public class bookStoreService {
     }
 
     public float postOrder(userOrder userOrder) throws IOException {
-        bookRepository.save(userOrder);
+        bookRepository2.save(userOrder);
         return userOrder.getPrice();
     }
 
